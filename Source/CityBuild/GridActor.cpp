@@ -24,18 +24,18 @@ void AGridActor::BeginPlay()
 	ensure(Components.Num() > 0);
 
 	const float EffectiveBoxExtentY = BoxExtent.Y * Scale.Y + Offset;
-	const float EffectiveBoxExtentZ = BoxExtent.Z * Scale.Z + Offset;
+	const float EffectiveBoxExtentX = BoxExtent.X * Scale.X + Offset;
 	const float YStep = EffectiveBoxExtentY * 2;
-	const float ZStep = EffectiveBoxExtentZ * 2;
+	const float XStep = EffectiveBoxExtentX * 2;
 	const float BoardWidth = EffectiveBoxExtentY * 2 * Width;
-	const float BoardHeight = EffectiveBoxExtentZ * 2 * Height;
+	const float BoardHeight = EffectiveBoxExtentX * 2 * Height;
 
 	const FVector Origin = GetActorLocation();
-	const FVector TopLeft(Origin.X, Origin.Y - BoardWidth / 2 + EffectiveBoxExtentY, Origin.Z + BoardHeight / 2 - EffectiveBoxExtentZ);
+	const FVector TopLeft(Origin.X + BoardHeight / 2 - EffectiveBoxExtentX, Origin.Y - BoardWidth / 2 + EffectiveBoxExtentY, Origin.Z );
 
 	for (int i = 0; i < Height; i++) {
 		for (int j = 0; j < Width; j++) {
-			const FVector Loc(Origin.X, TopLeft.Y + j * YStep, TopLeft.Z - i * ZStep);
+			const FVector Loc(TopLeft.X - i * XStep, TopLeft.Y + j * YStep, Origin.Z );
 			ACellActor* const SpawnedActorRef = GetWorld()->SpawnActor<ACellActor>(CellActor, Loc, GetActorRotation()); //const pointer to non-const CellActor
 			CellActors.Add(SpawnedActorRef);
 		}
