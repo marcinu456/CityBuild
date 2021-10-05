@@ -18,7 +18,7 @@ ARedBuildActor::ARedBuildActor()
 	GameMode->TotalPoints += BuildPoints;*/
 }
 
-void ARedBuildActor::OnPickUp(float bonus)
+void ARedBuildActor::OnPickUp(int32 bonus)
 {
 	ACityBuildGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ACityBuildGameModeBase>();
 	BuildPoints = 6 * bonus;

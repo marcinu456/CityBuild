@@ -9,6 +9,9 @@ AGridActor::AGridActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	FScriptDelegate OnClickedDelegate;
+	OnClickedDelegate.BindUFunction(this, "Clicked");
+	OnClicked.Add(OnClickedDelegate);
 }
 
 // Called when the game starts or when spawned
@@ -48,6 +51,28 @@ void AGridActor::BeginPlay()
 void AGridActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
+
+void AGridActor::Clicked()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Some warning message %d"), CountAliveNeighbors(0, 0));
+}
+
+int AGridActor::CountAliveNeighbors(const int32 i, const int32 j) {
+	int NumAliveNeighbors = 0;
+	for (int k = -1; k <= 1; k++) {
+		for (int l = -1; l <= 1; l++) {
+			if (!(l == 0 && k == 0)) {
+				const int effective_i = i + k;
+				const int effective_j = j + l;
+				if ((effective_i >= 0 && effective_i < Height) && (effective_j >= 0 && effective_j < Width)) {
+					if (CellActors[effective_j + effective_i * Width]->GetPlacable()) {
+						NumAliveNeighbors++;
+					}
+				}
+			}
+		}
+	}
+	return NumAliveNeighbors;
+}

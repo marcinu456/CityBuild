@@ -17,5 +17,5 @@ class CITYBUILD_API ARedBuildActor : public ABaseBuildActor
 		
 public:
 	ARedBuildActor();
-	virtual void OnPickUp(float bonus = 1) override;
+	virtual void OnPickUp(int32 bonus = 1) override;
 };

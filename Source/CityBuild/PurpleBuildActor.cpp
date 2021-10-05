@@ -1,24 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "RedBuildActor.h"
+#include "PurpleBuildActor.h"
 
 #include "CityBuildGameModeBase.h"
 
-ARedBuildActor::ARedBuildActor()
+APurpleBuildActor::APurpleBuildActor()
 {
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> SphereMeshAsset(TEXT("/Game/Materials/RedHouse.RedHouse"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> SphereMeshAsset(TEXT("/Game/Materials/PurpleHouse.PurpleHouse"));
 	if (SphereMeshAsset.Succeeded())
 	{
 		MeshComponent->SetStaticMesh(SphereMeshAsset.Object);
 	}
 
 	/*ACityBuildGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ACityBuildGameModeBase>();
-	BuildPoints = 10;
+	BuildPoints = 5;
 	GameMode->TotalPoints += BuildPoints;*/
 }
 
-void ARedBuildActor::OnPickUp(float bonus)
+void APurpleBuildActor::OnPickUp(float bonus)
 {
 	ACityBuildGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ACityBuildGameModeBase>();
 	BuildPoints = 6 * bonus;

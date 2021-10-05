@@ -4,18 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "BaseBuildActor.h"
-#include "RedBuildActor.generated.h"
+#include "WhiteBuildActor.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CITYBUILD_API ARedBuildActor : public ABaseBuildActor
+class CITYBUILD_API AWhiteBuildActor : public ABaseBuildActor
 {
 	GENERATED_BODY()
-
-		
 public:
-	ARedBuildActor();
+	AWhiteBuildActor();
+
 	virtual void OnPickUp(float bonus = 1) override;
 };

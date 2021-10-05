@@ -78,8 +78,7 @@ void ACellActor::Clicked()
 			if (RedBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<ARedBuildActor>(RedBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
-				if(ColorCell == 1)
-					BuildActor->OnPickUp(.5);
+				BuildActor->OnPickUp();
 			}
 		}
 		else if (rando >= 5 && rando < 10)
@@ -87,8 +86,7 @@ void ACellActor::Clicked()
 			if (YellowBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<AYellowBuildActor>(YellowBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
-				if(ColorCell == 0)
-					BuildActor->OnPickUp(2);
+				BuildActor->OnPickUp();
 			}
 		}
 		else if (rando >= 10 && rando < 15)
@@ -96,10 +94,7 @@ void ACellActor::Clicked()
 			if (WhiteBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<AWhiteBuildActor>(WhiteBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
-				if (ColorCell == 0)
-					BuildActor->OnPickUp(2);
-				else
-					BuildActor->OnPickUp(.5);
+				BuildActor->OnPickUp();
 			}
 		}
 		else
@@ -107,8 +102,7 @@ void ACellActor::Clicked()
 			if (PurpleBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<APurpleBuildActor>(PurpleBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
-				if (ColorCell == 1)
-					BuildActor->OnPickUp(2);
+				BuildActor->OnPickUp();
 			}
 		}
 	}

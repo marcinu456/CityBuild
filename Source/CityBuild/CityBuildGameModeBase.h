@@ -13,5 +13,6 @@ UCLASS()
 class CITYBUILD_API ACityBuildGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+public:
+	int32 TotalPoints = 0;
 };

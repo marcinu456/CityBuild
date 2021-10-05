@@ -19,6 +19,14 @@ public:
 		this->Occupied = IsOccupied;
 	}
 
+	void SetPlacable(const bool IsPlacable) {
+		this->Placable = IsPlacable;
+	}
+
+	bool GetPlacable() {
+		return this->Placable;
+	}
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -40,6 +48,7 @@ private:
 
 
 	mutable bool Occupied;
+	mutable bool Placable;
 
 	
 

@@ -29,10 +29,10 @@ public:
 
 /** Width of grid in number of cells. */
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1", AllowPrivateAccess = "true", Category = "Grid Setup"))
-		int Width = 50;
+		int32 Width = 50;
 	/** Height of grid in number of cells. */
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "1", AllowPrivateAccess = "true", Category = "Grid Setup"))
-		int Height = 50;
+		int32 Height = 50;
 	/** Offset between cells. */
 	UPROPERTY(EditAnywhere, meta = (ClampMin = "0.0", AllowPrivateAccess = "true", Category = "Grid Setup"))
 		float Offset = 15.0;
@@ -40,4 +40,10 @@ public:
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true", Category = "Grid Setup"))
 		TSubclassOf<ACellActor> CellActor;
 
+
+private:
+	UFUNCTION()
+		void Clicked();
+
+	int32 CountAliveNeighbors(const int32 i, const int32 j);
 };

@@ -27,7 +27,7 @@ protected:
 	int32 BuildPoints = 0;
 
 public:
-	virtual void OnPickUp(float bonus=1) PURE_VIRTUAL(ABaseBuildActor::OnPickUp, );
+	virtual void OnPickUp(int32 bonus=1) PURE_VIRTUAL(ABaseBuildActor::OnPickUp, );
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
