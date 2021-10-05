@@ -3,6 +3,7 @@
 
 #include "CellActor.h"
 
+#include "RedBuildActor.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -61,14 +62,12 @@ void ACellActor::Tick(float DeltaTime)
 
 void ACellActor::Clicked()
 {
-	if (Occupied) {
-		StaticMeshComponent->SetMaterial(0, BeginCursorOverMaterial);
-		Occupied = false;
-	}
-	else {
-		StaticMeshComponent->SetMaterial(0, ClickedMaterial);
-		Occupied = true;
-	}
+	StaticMeshComponent->SetMaterial(0, ClickedMaterial);
+	Occupied = true;
+	//BaseBuildClass. = new ARedBuildActor;
+	if(RedBuildClass)
+	GetWorld()->SpawnActor<ARedBuildActor>(RedBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
+	StaticMeshComponent->SetMaterial(0, BlueColorOfCell);
 }
 
 void ACellActor::BeginCursorOver()
@@ -101,3 +100,8 @@ void ACellActor::EndCursorOver()
 		Alive = false;
 	}
 }*/
+
+int32 ACellActor::GetColorCell()
+{
+	return ColorCell;
+}

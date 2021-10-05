@@ -27,7 +27,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	int32 GetColorCell();
 
+	FORCEINLINE class UStaticMeshComponent* GetStaticMesh() const { return StaticMeshComponent; }
 private:
 	UFUNCTION()
 		void Clicked();
@@ -39,7 +41,7 @@ private:
 
 	mutable bool Occupied;
 
-	int color = 0;
+	
 
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
@@ -64,6 +66,16 @@ private:
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true", Category = "Materials"))
 		UMaterialInterface* BlueColorOfCell;
 
-	int ColorCell;
+	int32 ColorCell;
+
+
+	UPROPERTY(EditDefaultsOnly, Category = Build)
+		TSubclassOf<class ABaseBuildActor> RedBuildClass;
+	UPROPERTY(EditDefaultsOnly, Category = Build)
+		TSubclassOf<class ABaseBuildActor> YellowBuildClass;
+	UPROPERTY(EditDefaultsOnly, Category = Build)
+		TSubclassOf<class ABaseBuildActor> PurpleBuildClass;
+	UPROPERTY(EditDefaultsOnly, Category = Build)
+		TSubclassOf<class ABaseBuildActor> WhiteBuildClass;
 
 };

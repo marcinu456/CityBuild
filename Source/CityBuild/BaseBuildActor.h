@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CellActor.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "BaseBuildActor.generated.h"
@@ -24,11 +25,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-
+	void AttachToCell();
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		UBoxComponent* SphereComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
 		UStaticMeshComponent* MeshComponent;
+
+	ACellActor* BuildingHolder;
 
 };
