@@ -27,20 +27,6 @@ public:
 		return this->Placable;
 	}
 
-	bool GetOccupied() {
-		return this->Occupied;
-	}
-
-	void GetCellPlace(int32& x, int32& y) {
-		x = CellX;
-		y = CellY;
-	}
-
-	void SetCellPlace(int32 x, int32 y) {
-		CellX = x;
-		CellY = y;
-	}
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -64,8 +50,7 @@ private:
 	mutable bool Occupied;
 	mutable bool Placable;
 
-	int32 CellX;
-	int32 CellY;
+	
 
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))

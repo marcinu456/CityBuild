@@ -65,7 +65,7 @@ void ACellActor::Tick(float DeltaTime)
 
 void ACellActor::Clicked()
 {
-	if (!Occupied) {
+	if (!Occupied && Placable) {
 		StaticMeshComponent->SetMaterial(0, BlueColorOfCell);
 		Occupied = true;
 		Placable = false;
@@ -116,7 +116,7 @@ void ACellActor::Clicked()
 
 void ACellActor::BeginCursorOver()
 {
-	if(Placable)
+	if(!Occupied && Placable)
 	StaticMeshComponent->SetMaterial(0, BeginCursorOverMaterial);
 }
 

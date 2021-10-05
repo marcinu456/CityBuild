@@ -45,10 +45,5 @@ private:
 	UFUNCTION()
 		void Clicked();
 
-	void WaitForFirst();
-
-	bool first = false;
-
 	int32 CountAliveNeighbors(const int32 i, const int32 j);
-	void SetAliveNeighbors(const int32 i, const int32 j);
 };

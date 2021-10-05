@@ -39,8 +39,7 @@ void AGridActor::BeginPlay()
 	for (int i = 0; i < Height; i++) {
 		for (int j = 0; j < Width; j++) {
 			const FVector Loc(TopLeft.X - i * XStep, TopLeft.Y + j * YStep, Origin.Z );
-			ACellActor* const SpawnedActorRef = GetWorld()->SpawnActor<ACellActor>(CellActor, Loc, GetActorRotation());
-			SpawnedActorRef->SetCellPlace(i, j);
+			ACellActor* const SpawnedActorRef = GetWorld()->SpawnActor<ACellActor>(CellActor, Loc, GetActorRotation()); //const pointer to non-const CellActor
 			CellActors.Add(SpawnedActorRef);
 		}
 	}
@@ -52,49 +51,12 @@ void AGridActor::BeginPlay()
 void AGridActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if(first)
-	{
-		Clicked();
-	}
-	else
-	{
-		WaitForFirst();
-	}
 }
 
-void AGridActor::WaitForFirst()
-{
-	for (auto& Cell : CellActors)
-	{
-		if (Cell->GetOccupied())
-		{
-			for (auto& Cello : CellActors)
-			{
-				Cello->SetPlacable(false);
-			}
-			first = true;
-			int32 i;
-			int32 j;
-			Cell->GetCellPlace(i, j);
-			SetAliveNeighbors(i, j);
-			break;
-		}
-	}
-}
 
 void AGridActor::Clicked()
 {
-
-	for(auto& Cell:CellActors)
-	{
-		if(Cell->GetOccupied())
-		{
-			int32 i;
-			int32 j;
-			Cell->GetCellPlace(i, j);
-			SetAliveNeighbors(i, j);
-		}
-	}
+	UE_LOG(LogTemp, Warning, TEXT("Some warning message %d"), CountAliveNeighbors(0, 0));
 }
 
 int AGridActor::CountAliveNeighbors(const int32 i, const int32 j) {
@@ -113,20 +75,4 @@ int AGridActor::CountAliveNeighbors(const int32 i, const int32 j) {
 		}
 	}
 	return NumAliveNeighbors;
-}
-
-void AGridActor::SetAliveNeighbors(const int32 i, const int32 j)
-{
-	for (int32 k = -1; k <= 1; k++) {
-		for (int32 l = -1; l <= 1; l++) {
-			if (!(l == 0 && k == 0)) {
-				const int32 effective_i = i + k;
-				const int32 effective_j = j + l;
-				if ((effective_i >= 0 && effective_i < Height) && (effective_j >= 0 && effective_j < Width)) {
-					CellActors[effective_j + effective_i * Width]->SetPlacable(true);
-
-				}
-			}
-		}
-	}
 }
