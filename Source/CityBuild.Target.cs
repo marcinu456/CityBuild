@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class CityBuildTarget : TargetRules
 {
-	public CityBuildTarget(TargetInfo Target) : base(Target)
+	public CityBuildTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("CityBuild");
+		ExtraModuleNames.AddRange( new string[] { "CityBuild" } );
 	}
 }
