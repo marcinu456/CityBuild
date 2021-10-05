@@ -24,13 +24,32 @@ ACellActor::ACellActor()
 	OnClicked.Add(OnClickedDelegate);
 	OnBeginCursorOver.Add(OnBeginCursorOverDelegate);
 	OnEndCursorOver.Add(OnEndCursorOverDelegate);
+
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> SphereMeshAsset(TEXT("/Game/Materials/Shape_Sphere.Shape_Sphere"));
+	if (SphereMeshAsset.Succeeded())
+	{
+		StaticMeshComponent->SetStaticMesh(SphereMeshAsset.Object);
+	}
+
 }
 
 // Called when the game starts or when spawned
 void ACellActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (FMath::RandRange(1, 20) > 10)
+	{
+		StaticMeshComponent->SetMaterial(0, GreenColorOfCell);
+		ColorCell = 0;
+		EndCursorOverMaterial = GreenColorOfCell;
+	}
+	else
+	{
+		StaticMeshComponent->SetMaterial(0, GreyColorOfCell);
+		ColorCell = 1;
+		EndCursorOverMaterial = GreyColorOfCell;
+	}
 }
 
 // Called every frame

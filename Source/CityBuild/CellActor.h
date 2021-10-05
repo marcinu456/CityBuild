@@ -39,6 +39,8 @@ private:
 
 	mutable bool Occupied;
 
+	int color = 0;
+
 
 	UPROPERTY(VisibleAnywhere, meta = (AllowPrivateAccess = "true"))
 		UStaticMeshComponent* StaticMeshComponent;
@@ -52,5 +54,16 @@ private:
 	/** Material for when the cell is not alive in edit mode. */
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true", Category = "Materials"))
 		UMaterialInterface* EndCursorOverMaterial;
+	/** Material for when the cell is not alive in edit mode. */
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true", Category = "Materials"))
+		UMaterialInterface* GreenColorOfCell;
+	/** Material for when the cell is not alive in edit mode. */
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true", Category = "Materials"))
+		UMaterialInterface* GreyColorOfCell;
+	/** Material for when the cell is not alive in edit mode. */
+	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true", Category = "Materials"))
+		UMaterialInterface* BlueColorOfCell;
+
+	int ColorCell;
 
 };
