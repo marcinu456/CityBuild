@@ -102,4 +102,5 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Build)
 		TSubclassOf<class ABaseBuildActor> WhiteBuildClass;
 
+
 };

@@ -3,6 +3,7 @@
 
 #include "CellActor.h"
 
+#include "CityBuildGameModeBase.h"
 #include "PurpleBuildActor.h"
 #include "RedBuildActor.h"
 #include "WhiteBuildActor.h"
@@ -66,53 +67,72 @@ void ACellActor::Tick(float DeltaTime)
 void ACellActor::Clicked()
 {
 	if (!Occupied && Placable) {
-		StaticMeshComponent->SetMaterial(0, BlueColorOfCell);
-		Occupied = true;
-		Placable = false;
-		//BaseBuildClass. = new ARedBuildActor;
+		ACityBuildGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ACityBuildGameModeBase>();
 
-		int32 rando = FMath::RandRange(0, 20);
-
-		if (rando < 5)
+		if (GameMode->Building == 0 && GameMode->RedBuilding > 0)
 		{
 			if (RedBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<ARedBuildActor>(RedBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
 				if(ColorCell == 1)
 					BuildActor->OnPickUp(.5);
+				else
+					BuildActor->OnPickUp(1);
+				GameMode->RedBuilding--;
+				StaticMeshComponent->SetMaterial(0, BlueColorOfCell);
+				Occupied = true;
+				Placable = false;
 			}
+			
 		}
-		else if (rando >= 5 && rando < 10)
+		else if (GameMode->Building == 1 && GameMode->YellowBuilding > 0)
 		{
 			if (YellowBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<AYellowBuildActor>(YellowBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
 				if(ColorCell == 0)
 					BuildActor->OnPickUp(2);
+				else
+					BuildActor->OnPickUp(1);
+				GameMode->YellowBuilding--;
+				StaticMeshComponent->SetMaterial(0, BlueColorOfCell);
+				Occupied = true;
+				Placable = false;
 			}
 		}
-		else if (rando >= 10 && rando < 15)
+		else if (GameMode->Building == 2 && GameMode->WhiteBuilding > 0)
 		{
 			if (WhiteBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<AWhiteBuildActor>(WhiteBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
 				if (ColorCell == 0)
-					BuildActor->OnPickUp(2);
+					BuildActor->OnPickUp(1);
 				else
 					BuildActor->OnPickUp(.5);
+				GameMode->WhiteBuilding--;
+				StaticMeshComponent->SetMaterial(0, BlueColorOfCell);
+				Occupied = true;
+				Placable = false;
 			}
 		}
-		else
+		else if(GameMode->Building == 3 && GameMode->PurpleBuilding > 0)
 		{
 			if (PurpleBuildClass)
 			{
 				auto BuildActor = GetWorld()->SpawnActor<APurpleBuildActor>(PurpleBuildClass, StaticMeshComponent->GetSocketLocation(FName("HouseSocket")), StaticMeshComponent->GetSocketRotation(FName("HouseSocket")));
 				if (ColorCell == 1)
 					BuildActor->OnPickUp(2);
+				else
+					BuildActor->OnPickUp(1);
+				GameMode->PurpleBuilding--;
+				StaticMeshComponent->SetMaterial(0, BlueColorOfCell);
+				Occupied = true;
+				Placable = false;
 			}
 		}
 	}
 }
+
 
 void ACellActor::BeginCursorOver()
 {
@@ -131,20 +151,6 @@ void ACellActor::EndCursorOver()
 	}
 
 }
-
-/*void ACellActor::Update()
-{
-	/*if (AliveNext) {
-		StaticMeshComponent->SetMaterial(0, ClickedMaterial);
-		Alive = true;
-		SetActorHiddenInGame(false);
-	}
-	else {
-		SetActorHiddenInGame(true);
-		StaticMeshComponent->SetMaterial(0, EndCursorOverMaterial);
-		Alive = false;
-	}
-}*/
 
 int32 ACellActor::GetColorCell()
 {

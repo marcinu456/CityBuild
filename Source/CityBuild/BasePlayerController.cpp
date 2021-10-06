@@ -3,3 +3,10 @@
 
 #include "BasePlayerController.h"
 
+ABasePlayerController::ABasePlayerController()
+{
+	SetShowMouseCursor(true);
+	bEnableClickEvents = true;
+	bEnableMouseOverEvents = true;
+	bEnableTouchOverEvents = true;
+}

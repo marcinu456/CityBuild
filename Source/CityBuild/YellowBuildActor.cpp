@@ -21,6 +21,6 @@ AYellowBuildActor::AYellowBuildActor()
 void AYellowBuildActor::OnPickUp(float bonus)
 {
 	ACityBuildGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ACityBuildGameModeBase>();
-	BuildPoints = 6 * bonus;
+	BuildPoints = 8 * bonus;
 	GameMode->TotalPoints += BuildPoints;
 }

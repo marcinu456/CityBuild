@@ -13,5 +13,6 @@ UCLASS()
 class CITYBUILD_API ABasePlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+public:
+		ABasePlayerController();
 };
